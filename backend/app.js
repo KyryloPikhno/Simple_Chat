@@ -1,23 +1,14 @@
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+app.use(express.json());
+app.use(cors({origin: true}));
 
-app.use(express.static('public'));
+app.post('authenticate'), async (req,res)=>{
+    const {username} = req.body;
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+    return res.json({username, secret: 'hello'});
+}
 
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
-    });
-});
-
-http.listen(3000, () => {
-    console.log('listening on *:3000');
-});
+app.listen(4000);
