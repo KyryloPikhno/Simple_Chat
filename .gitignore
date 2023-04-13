@@ -1,3 +1,4 @@
 backend/package-lock.json
 simple-chat.iml
 .idea
+.env
