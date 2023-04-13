@@ -1,14 +1,6 @@
+const http = require('http');
+const socketIO = require('socket.io');
 const express = require('express');
-const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-const app = express();
-app.use(express.json());
-app.use(cors({origin: true}));
-
-app.post('authenticate'), async (req,res)=>{
-    const {username} = req.body;
-
-    return res.json({username, secret: 'hello'});
-}
-
-app.listen(4000);
